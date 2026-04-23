@@ -98,7 +98,7 @@ def get_comment(db:Session=Depends(get_db),get_current_user=Depends(oauth.get_cu
     if not query_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"{query_user} is not found")
     query_tasks = db.query(models.Tasks).filter(
-        models.Tasks.user_id == get_current_user.id
+        models.Comments.user_id == get_current_user.id
     )
     query_limit = query_tasks.offset(offset).limit(limit).all()
     if not query_limit:

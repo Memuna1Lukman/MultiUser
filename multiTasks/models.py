@@ -32,8 +32,8 @@ class Tasks(Base):
     status =   Column(String,nullable=False,index=True)   
     created_at = Column(TIMESTAMP(timezone=True),nullable=False,server_default=text('now()'))
     updated_at = Column(TIMESTAMP(timezone=True),nullable=False,server_default=text('now()'))
-    deleted_at = Column(TIMESTAMP(timezone=True),nullable=False,default=None)
-    task_comments = relationship("Comments",foreign_keys="[Comment.task_id]",back_populates="task")
+    deleted_at = Column(TIMESTAMP(timezone=True),nullable=True)
+    task_comments = relationship("Comments",foreign_keys="[Comments.task_id]",back_populates="task")
 
 
 

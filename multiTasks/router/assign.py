@@ -30,7 +30,7 @@ def assign_tasks(admin:schemas.AssignTasks,
     
     tasks = admin.dict()
     tasks['created_by'] = get_current_user.id
-
+    
     tasks = models.Tasks(**tasks)
     db.add(tasks)
     db.commit()
@@ -127,7 +127,7 @@ def paginations(db:Session=Depends(get_db),get_current_user=Depends(oauth.get_cu
     if status:
         query_tasks = db.query(models.Tasks).filter(models.Tasks.status == status)
     query_tasks = db.query(models.Tasks).filter(
-        models.Tasks.user_id == get_current_user.id
+        models.Tasks.assigned_to == get_current_user.id
     )
     query_limit = query_tasks.offset(offset).limit(limit).all()
 
